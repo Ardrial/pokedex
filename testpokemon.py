@@ -3,6 +3,7 @@ import sys
 import json
 import random
 from flask import Flask, render_template
+import redis
 app = Flask(__name__)
 
 
