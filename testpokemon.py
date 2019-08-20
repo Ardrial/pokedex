@@ -1,5 +1,4 @@
 import argparse
-import sys
 import json
 import random
 from flask import Flask, render_template
