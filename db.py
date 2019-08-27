@@ -10,7 +10,12 @@ class PokemonNotFoundError(Exception):
 
 
 def get():
-    pass
+    i = 1
+    pkmn = {}
+    while i <= 151:
+        pkmn[str(i)] = get_one(str(i))
+        i += 1
+    return pkmn
 
 
 def get_one(key):
