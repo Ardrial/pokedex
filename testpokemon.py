@@ -2,7 +2,7 @@ import argparse
 import random
 from flask import Flask, render_template
 import db
-import typesearch
+import type_and_weakness_search
 
 
 app = Flask(__name__)
@@ -41,7 +41,8 @@ def run():
     parser.add_argument("--pokedex", help="list the pokemon's Pokedex Number", action="store_true")
     parser.add_argument("--type", help="list the pokemon's Typing", action="store_true")
     parser.add_argument("--evolution", help="list the pokemon's stage of evolution", action="store_true")
-    parser.add_argument("--typesearch", help="searches all pokemon and returns a list of all pokemon that have that type", action="store_true")
+    parser.add_argument("--typesearch", help="searches all pokemon and returns a random pokemon that has that type", action="store_true")
+    parser.add_argument("--weaknesssearch", help="searches all pokemon and returns a random pokemon that has that weakness", action="store_true")
     args = parser.parse_args()  # Parse arguments
 
     try:
@@ -50,7 +51,9 @@ def run():
         elif args.input.lower() == "0":
             pkmn = db.get_one(str(random.randint(1, 151)))
         elif args.typesearch:
-            pkmn = typesearch.search_by_type(args.input)
+            pkmn = type_and_weakness_search.search_by_type(args.input)
+        elif args.weaknesssearch:
+            pkmn = type_and_weakness_search.search_by_weakness(args.input)
         else:
             pkmn = db.get_one(args.input.lower())
     except db.PokemonNotFoundError:
