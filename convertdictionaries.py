@@ -11,20 +11,8 @@ if __name__ == '__main__':
         for x,y in pkmn.items():
             if x.lower() == "evolution":
                 try:
-                    if y == "second evolution" and pokemon_by_id[str(int(pkmn_id) + 1)][x.lower()] == "third evolution":
-                        pokemon_by_id[pkmn_id][x] = {"name": pokemon_by_id[str(int(pkmn_id) + 1)]["name"], "pokedex": pokemon_by_id[str(int(pkmn_id) + 1)]["pokedex"]}
-                    elif y == "first evolution" and pokemon_by_id[str(int(pkmn_id)+1)][x.lower()] == "second evolution":
-                        pokemon_by_id[pkmn_id][x] = {"name": pokemon_by_id[str(int(pkmn_id)+1)]["name"], "pokedex": pokemon_by_id[str(int(pkmn_id)+1)]["pokedex"]}
-                    elif y == "third evolution" and pokemon_by_id[str(int(pkmn_id) + 1)][x.lower()] != "fourth evolution":
-                        pokemon_by_id[pkmn_id][x] = {"name": "", "pokedex": "none"}
-                    elif y == "second evolution" and pokemon_by_id[str(int(pkmn_id)+1)][x.lower()] != "third evolution":
-                        pokemon_by_id[pkmn_id][x] = {"name": "", "pokedex": "none"}
-                    elif y == "first evolution" and pokemon_by_id[str(int(pkmn_id)+1)][x.lower()] != "second evolution":
-                        pokemon_by_id[pkmn_id][x] = {"name": "", "pokedex": "none"}
-                    elif y == "none":
-                        pokemon_by_id[pkmn_id][x] = {"name": "", "pokedex": "none"}
-                    elif y == "no evolution":
-                        pokemon_by_id[pkmn_id][x] = {"name": "", "pokedex": "none"}
+                    del pokemon_by_id[pkmn_id][x]['Type']
+                    del pokemon_by_id[pkmn_id][x]['Weakness']
                 except KeyError:
                         print("End of Dictionary! ")
     new_pokemon_by_name = {}

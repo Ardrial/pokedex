@@ -18,18 +18,17 @@ class Pokemon:
 
 
 def create_dict(pkmn, weakness, pokedex, type, evolution):
-    pokemon_choice = Pokemon(pkmn['name'].title(), pkmn['pokedex'], ', '.join(pkmn['weakness']).title(),
-                             ', '.join(pkmn['type']).title(), ((str(pkmn['evolution']).title()).strip('{')).strip('}'))
-    choice_dict = {'Name': pokemon_choice.name}
+    pokemon_choice = Pokemon(**pkmn)
+    choice_dict = {'Name': pokemon_choice.name.title()}
     all_args = not any([weakness, type, evolution, pokedex])
     if pokedex or all_args:
         choice_dict['Pokedex #'] = pokemon_choice.pokedex
     if type or all_args:
-        choice_dict['Type'] = pokemon_choice.type
+        choice_dict['Type'] = ', '.join(pokemon_choice.type).title()
     if weakness or all_args:
-        choice_dict['Weakness'] = pokemon_choice.weakness
+        choice_dict['Weakness'] = ', '.join(pokemon_choice.weakness).title()
     if evolution or all_args:
-        choice_dict['Evolution'] = pokemon_choice.evolution
+        choice_dict['Evolution'] = ((str(pokemon_choice.evolution).title()).strip('{')).strip('}')
     return choice_dict
 
 
@@ -55,8 +54,8 @@ def run():
             pokemon_dict = create_dict(pkmn, args.weakness, args.pokedex, args.type, args.evolution)
             return render_template('pokemon.html', result=pokemon_dict)
         elif args.typesearch:
-            return type_and_weakness_search.search_by_type(args.input)
-            # type_and_weakness_search.create_dict_multiple(pkmn_multiple, args.weakness, args.pokedex, args.type, args.evolution)
+            pkmn_multiple = type_and_weakness_search.search_by_type(args.input)
+            return type_and_weakness_search.create_dict_multiple(pkmn_multiple, args.weakness, args.pokedex, args.type, args.evolution)
             #return render_template('pokemon_multiple.html', result=pokemon_dict_multiple)
         elif args.weaknesssearch:
             return type_and_weakness_search.search_by_weakness(args.input)
@@ -68,6 +67,7 @@ def run():
             return render_template('pokemon.html', result=pokemon_dict)
     except db.PokemonNotFoundError:
         return "No result found!"
+
 
 if __name__ == '__main__':
     app.run(debug=True)

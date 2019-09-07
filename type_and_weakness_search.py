@@ -34,8 +34,6 @@ def search_by_weakness(input):
 
 
 def create_dict_multiple(pkmn, weakness, pokedex, type, evolution):
-    pokemon_choice = Pokemon(pkmn['name'].title(), pkmn['pokedex'], ', '.join(pkmn['weakness']).title(),
-                             ', '.join(pkmn['type']).title(), ((str(pkmn['evolution']).title()).strip('{')).strip('}'))
     choice_dict = {'Name': pokemon_choice.name}
     all_args = not any([weakness, type, evolution, pokedex])
     if pokedex or all_args:
