@@ -54,13 +54,9 @@ def run():
             pokemon_dict = create_dict(pkmn, args.weakness, args.pokedex, args.type, args.evolution)
             return render_template('pokemon.html', result=pokemon_dict)
         elif args.typesearch:
-            pkmn_multiple = type_and_weakness_search.search_by_type(args.input)
-            return type_and_weakness_search.create_dict_multiple(pkmn_multiple, args.weakness, args.pokedex, args.type, args.evolution)
-            #return render_template('pokemon_multiple.html', result=pokemon_dict_multiple)
+            return type_and_weakness_search.search_by_type(args.input)
         elif args.weaknesssearch:
             return type_and_weakness_search.search_by_weakness(args.input)
-            # return type_and_weakness_search.create_dict_multiple(pkmn_multiple, args.weakness, args.pokedex, args.type, args.evolution)
-            #return render_template('pokemon_multiple.html', result=pokemon_dict_multiple)
         else:
             pkmn = db.get_one(args.input.lower())
             pokemon_dict = create_dict(pkmn, args.weakness, args.pokedex, args.type, args.evolution)

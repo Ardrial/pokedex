@@ -31,17 +31,3 @@ def search_by_weakness(input):
         i += 1
     # return random.choice(list(pkmn.values()))
     return pkmn
-
-
-def create_dict_multiple(pkmn, weakness, pokedex, type, evolution):
-    choice_dict = {'Name': pokemon_choice.name}
-    all_args = not any([weakness, type, evolution, pokedex])
-    if pokedex or all_args:
-        choice_dict['Pokedex #'] = pokemon_choice.pokedex
-    if type or all_args:
-        choice_dict['Type'] = pokemon_choice.type
-    if weakness or all_args:
-        choice_dict['Weakness'] = pokemon_choice.weakness
-    if evolution or all_args:
-        choice_dict['Evolution'] = pokemon_choice.evolution
-    return choice_dict
